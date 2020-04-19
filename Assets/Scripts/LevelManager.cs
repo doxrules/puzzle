@@ -1,9 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] private GlobalConfig GlobalConfig;
     [SerializeField] private LevelConfig LevelConfig;
     [SerializeField] private Transform PiecesParent;
 
@@ -13,6 +15,10 @@ public class LevelManager : MonoBehaviour
     
     void Start()
     {
+        Debug.Assert(GlobalConfig != null, "GlobalConfig not set");
+        Debug.Assert(LevelConfig != null, "LevelConfig not set");
+        Debug.Assert(PiecesParent != null, "PieceParent not set");
+        
         _pieceGenerator = FindObjectOfType<PieceGenerator>();
         _pieceGenerator.GeneratePieces(LevelConfig.TotalPieces, LevelConfig.PiecesPrefabs, PiecesParent);
     }
@@ -20,7 +26,7 @@ public class LevelManager : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonUp("Fire1"))
         {
             DetectTouch();
         }
@@ -34,12 +40,25 @@ public class LevelManager : MonoBehaviour
         
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 9999f, _pieceTouchLayer))
         {
+            var piece = hit.collider.GetComponent<Piece>();
+            Debug.Log("PIECE " + piece.pieceType);
             
-            
+            var groupFinder = new GroupFinder();
+            var group = groupFinder.FindGroup(piece);
+
+            if (group != null && group.Count >= GlobalConfig.MinGroupSizeToDestroy)
+            {
+                DestroyGroup(group);
+            }
         }
-        else
+        
+    }
+
+    void DestroyGroup(List<GameObject> group)
+    {
+        foreach (var piece in group)
         {
-            
+            Destroy(piece);
         }
         
     }

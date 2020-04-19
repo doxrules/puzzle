@@ -36,7 +36,7 @@ public class PieceGenerator : MonoBehaviour
         while (_piecesGenerated  <  _piecesToGenerate)
         {
             var newPiece = Instantiate(GetRandomPiece(), GetRandomPosition(), Quaternion.identity, _piecesParent);
-            newPiece.name = "Piece_" + _piecesGenerated;
+            newPiece.GetComponent<Piece>().Initialize(_piecesGenerated);
             ++_piecesGenerated;
             
             yield return SpawnDelay;
