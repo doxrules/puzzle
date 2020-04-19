@@ -42,7 +42,6 @@ public class GroupFinder
             
         }
         
-        Debug.Log(hits.Length);
     }
 
 }

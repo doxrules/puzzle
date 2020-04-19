@@ -13,6 +13,7 @@ public class Piece : MonoBehaviour
         Blue
     }
 
+    [SerializeField] private GlobalConfig GlobalConfig;
     [SerializeField] private TextMeshPro _numberLabel;
     
     public PieceType pieceType;
@@ -22,7 +23,15 @@ public class Piece : MonoBehaviour
     
     public void Initialize(int pieceNumber)
     {
-        this.name = "Piece_" + pieceNumber;
-        _numberLabel.text = pieceNumber.ToString();
+        if (GlobalConfig.DebugModeEnabled)
+        {
+            _numberLabel.gameObject.SetActive(true);
+            this.name = "Piece_" + pieceNumber;
+            _numberLabel.text = pieceNumber.ToString();
+        }
+        else
+        {
+            _numberLabel.gameObject.SetActive(false);
+        }
     }
 }

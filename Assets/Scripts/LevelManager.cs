@@ -41,7 +41,6 @@ public class LevelManager : MonoBehaviour
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 9999f, _pieceTouchLayer))
         {
             var piece = hit.collider.GetComponent<Piece>();
-            Debug.Log("PIECE " + piece.pieceType);
             
             var groupFinder = new GroupFinder();
             var group = groupFinder.FindGroup(piece);

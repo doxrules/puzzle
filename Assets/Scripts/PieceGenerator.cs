@@ -53,6 +53,6 @@ public class PieceGenerator : MonoBehaviour
 
     GameObject GetRandomPiece()
     {
-        return _piecePrefabs[Random.Range(0, _piecePrefabs.Count - 1)];
+        return _piecePrefabs[Random.Range(0, _piecePrefabs.Count)];
     }
 }

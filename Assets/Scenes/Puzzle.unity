@@ -940,6 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99715bbba53b81f469ced48a77d19eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GlobalConfig: {fileID: 11400000, guid: cbf8b4033ef948749b72c0f1cad9092d, type: 2}
   LevelConfig: {fileID: 11400000, guid: 35d97161da811d7428f9e65bb969fbae, type: 2}
   PiecesParent: {fileID: 838766383}
 --- !u!1 &2016187779

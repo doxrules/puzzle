@@ -5,4 +5,5 @@ using UnityEngine;
 public class GlobalConfig : ScriptableObject
 {
     public int MinGroupSizeToDestroy;
+    public bool DebugModeEnabled;
 }
