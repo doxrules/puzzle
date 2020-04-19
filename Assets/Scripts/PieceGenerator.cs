@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class PieceGenerator : MonoBehaviour
 {
-
+    [SerializeField] private PieceCollection PieceCollection;
     [SerializeField] private float SpawnDelay;
     [SerializeField] private BoxCollider SpawnArea;
     
     private int _piecesToGenerate;
-    private List<GameObject> _piecePrefabs;
+    private List<Piece.PieceType> _availablePieces;
     private Transform _piecesParent;
     
     private int _piecesGenerated;
@@ -18,14 +18,14 @@ public class PieceGenerator : MonoBehaviour
     private float _xRangeInterval;
     private float _yRangeInterval;
     
-    public void GeneratePieces(int piecesToGenerate, List<GameObject> piecePrefabs, Transform piecesParent)
+    public void GeneratePieces(int piecesToGenerate, List<Piece.PieceType> availablePieces, Transform piecesParent)
     {
         _piecesToGenerate = piecesToGenerate;
-        _piecePrefabs = piecePrefabs;
+        _availablePieces = availablePieces;
         _piecesParent = piecesParent;
         
-        _xRangeInterval = SpawnArea.size.x * 0.5f;
-        _yRangeInterval = SpawnArea.size.y * 0.5f;
+        _xRangeInterval = SpawnArea.size.x * 0.5f * 100f;
+        _yRangeInterval = SpawnArea.size.y * 0.5f * 100f;
 
         StartCoroutine(nameof(CreatePieces));
     }
@@ -45,14 +45,15 @@ public class PieceGenerator : MonoBehaviour
 
     Vector3 GetRandomPosition()
     {
-        var randomX = SpawnArea.transform.position.x + Random.Range(-_xRangeInterval, _xRangeInterval);
-        var randomY = SpawnArea.transform.position.y + Random.Range(-_yRangeInterval, _yRangeInterval);
+        var randomX = SpawnArea.transform.position.x + Random.Range(-_xRangeInterval, _xRangeInterval) / 100f;
+        var randomY = SpawnArea.transform.position.y + Random.Range(-_yRangeInterval, _yRangeInterval) / 100f;
         
         return new Vector3(randomX, randomY, SpawnArea.transform.position.z);
     }
 
     GameObject GetRandomPiece()
     {
-        return _piecePrefabs[Random.Range(0, _piecePrefabs.Count)];
+        var pieceType = _availablePieces[Random.Range(0, _availablePieces.Count)];
+        return PieceCollection.GetPieceConfig(pieceType).Prefab;
     }
 }

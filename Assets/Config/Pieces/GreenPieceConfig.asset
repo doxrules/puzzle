@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bb9411f8185ee4daab58ed1d5fec2f, type: 3}
+  m_Name: GreenPieceConfig
+  m_EditorClassIdentifier: 
+  PieceType: 2
+  PieceSprite: {fileID: 21300004, guid: 51e2a399831333b478ec978ee598bf0e, type: 3}
+  Prefab: {fileID: 6016353912941024875, guid: a47bd71dae2a3934a9c923e6f612c966, type: 3}
