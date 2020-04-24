@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - Piece
-  - 
+  - 3DUI
   - 
   - 
   - 
@@ -40,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 3DUI
+    uniqueID: 4069706005
     locked: 0
