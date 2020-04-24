@@ -17,11 +17,9 @@ namespace UnityTemplateProjects.Events
     {
         public TouchManager.TouchState TouchState;
         public Vector2 DeltaIncrement;
-        public float DeltaMultiTouch;
+        public float DeltaIncrementMagnitude;
         public Vector2 InitPosition;
         public Vector2 CurPosition;
-        public Vector2 CurPanDirection;
-        public float TotalPanScreenPercentageSize;
     }
 
 }

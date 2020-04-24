@@ -1,5 +1,6 @@
 using UnityTemplateProjects.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class CameraController : MonoBehaviour
         Manual
     }
 
-    [SerializeField] private Camera TargetCamera;
+    [SerializeField] private Camera MainCamera;
 
     [SerializeField] private BoxCollider CameraBounds;
     
@@ -36,6 +37,11 @@ public class CameraController : MonoBehaviour
     
     private Vector3 _targetCameraPosition;
 
+    public Camera GetMainCamera()
+    {
+        return MainCamera;
+    }
+    
     public float Zoom
     {
         get { return _zoom; }
@@ -67,8 +73,8 @@ public class CameraController : MonoBehaviour
     
     public void SetInitialCamera()
     {
-        _targetCameraPosition = TargetCamera.transform.position;
-        Zoom = TargetCamera.orthographicSize;
+        _targetCameraPosition = MainCamera.transform.position;
+        Zoom = MainCamera.orthographicSize;
     }
     
     private void OnTouchUpdated(BaseEventData ev)
@@ -88,7 +94,7 @@ public class CameraController : MonoBehaviour
                 //ResetRotation();
                 break;
             case TouchManager.TouchState.UpdateMultiTouch:
-                UpdateZoom(-touchEventData.DeltaMultiTouch);
+                UpdateZoom(-touchEventData.DeltaIncrementMagnitude);
                 break;
         }
     }
@@ -104,13 +110,13 @@ public class CameraController : MonoBehaviour
 
     void UpdateManualCamera()
     {
-        TargetCamera.transform.position = Vector3.Slerp(transform.position,  TargetCameraPosition, lerpValue);
-        TargetCamera.orthographicSize = Mathf.Lerp(TargetCamera.orthographicSize, Zoom, lerpValue);
+        MainCamera.transform.position = Vector3.Slerp(transform.position,  TargetCameraPosition, lerpValue);
+        MainCamera.orthographicSize = Mathf.Lerp(MainCamera.orthographicSize, Zoom, lerpValue);
     }
 
     void PanCamera(Vector2 deltaMovement)
     {
-        TargetCameraPosition += new Vector3(0f, -deltaMovement.y * CameraVerticalPanSpeed * 0.01f, -deltaMovement.x * CameraHorizontalPanSpeed * 0.01f); 
+        TargetCameraPosition += new Vector3(0f, deltaMovement.y * CameraVerticalPanSpeed * 0.01f, deltaMovement.x * CameraHorizontalPanSpeed * 0.01f); 
     }
     
     void UpdateZoom(float delta)

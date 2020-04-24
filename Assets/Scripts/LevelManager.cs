@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private LevelConfig LevelConfig;
     [SerializeField] private Transform PiecesParent;
 
-    private const int _pieceTouchLayer = 1 << 10;
+    private int _pieceTouchLayer;
     private UIManager _uiManager;
     
     private PieceGenerator _pieceGenerator;
@@ -23,6 +23,8 @@ public class LevelManager : MonoBehaviour
         Debug.Assert(GlobalConfig != null, "GlobalConfig not set");
         Debug.Assert(LevelConfig != null, "LevelConfig not set");
         Debug.Assert(PiecesParent != null, "PieceParent not set");
+        
+        _pieceTouchLayer = 1 << LayerMask.NameToLayer("Piece");
         
         _pieceGenerator = FindObjectOfType<PieceGenerator>();
         _uiManager = FindObjectOfType<UIManager>();

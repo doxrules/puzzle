@@ -11,6 +11,7 @@ public class TouchManager : MonoBehaviour
     public enum TouchState
     {
         None,
+        InitGesture,
         InitPan,
         UpdatePan,
         FinishPan,
@@ -20,11 +21,12 @@ public class TouchManager : MonoBehaviour
         Tap,
         TapPressing
     }
-    
+
+    [SerializeField] float MaxScreenPercentageDistanceForValidTap = 0.02f;
     private bool _inPanGesture = false;
-    private Vector2 _initPanPosition;
-    private Vector2 _prevPanPosition;
-    private Vector2 _curPanPosition;
+    private Vector2 _initGesturePosition;
+    private Vector2 _prevGesturePosition;
+    private Vector2 _curGesturePosition;
     private TouchState _touchState;
     private int _panTouchId;
 
@@ -34,6 +36,7 @@ public class TouchManager : MonoBehaviour
 
     private Vector2 _multiTouchPreviousVector;
     private float _deltaMultiTouch;
+    private float _screenDiagonal;
     
     private int _touchLayer;
     void OnEnable ()
@@ -47,6 +50,8 @@ public class TouchManager : MonoBehaviour
 
         _isMobileDevice = Application.platform == RuntimePlatform.Android ||
                           Application.platform == RuntimePlatform.IPhonePlayer;
+        
+        _screenDiagonal = Mathf.Sqrt((Screen.width * Screen.width) + (Screen.height * Screen.height));
     }
 
     void Update ()
@@ -67,13 +72,13 @@ public class TouchManager : MonoBehaviour
         if (touchCount == 1)
         {
             var touch = Input.touches[0];
-            UpdateSingleTouch(touch.phase, touch.position);
+            //UpdateSingleTouch(touch.phase, touch.position);
             return;
         }
         
-        _initPanPosition = Vector2.zero;
-        _prevPanPosition = Vector2.zero;
-        _curPanPosition = Vector2.zero;
+        _initGesturePosition = Vector2.zero;
+        _prevGesturePosition = Vector2.zero;
+        _curGesturePosition = Vector2.zero;
         
         if (touchCount == 0 || touchCount > 2)
         {
@@ -83,7 +88,7 @@ public class TouchManager : MonoBehaviour
             if (_touchState == TouchState.UpdateMultiTouch)
             {
                 _touchState = TouchState.FinishMultiTouch;
-                TriggerTouchEvent(Vector2.zero);
+                TriggerTouchEvent(Vector2.zero, 0f);
                 return;
             }
 
@@ -106,7 +111,7 @@ public class TouchManager : MonoBehaviour
             {
                 _multiTouchPreviousVector = touchVector;
                 _touchState = TouchState.InitMultiTouch;
-                TriggerTouchEvent(Vector2.zero);
+                TriggerTouchEvent(Vector2.zero, 0f);
                 _deltaMultiTouch = 0f;
                 return;
             }
@@ -125,19 +130,60 @@ public class TouchManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            UpdateSingleTouch(TouchPhase.Began, Input.mousePosition);
+            _initGesturePosition = Input.mousePosition;
+            _prevGesturePosition = _initGesturePosition;
+            _curGesturePosition = _initGesturePosition;
+            
+            _touchState = TouchState.InitGesture;
             return;
         }
 
         if (Input.GetButton("Fire1"))
         {
-            UpdateSingleTouch(TouchPhase.Moved, Input.mousePosition);
+            _prevGesturePosition = _curGesturePosition;
+            _curGesturePosition = Input.mousePosition;
+
+            var increment = _prevGesturePosition - _curGesturePosition;
+            
+            if (_touchState == TouchState.InitGesture && 
+                GetDistanceInScreenPercentage(increment.magnitude) > MaxScreenPercentageDistanceForValidTap)
+            {
+                _touchState = TouchState.InitPan;
+            }
+            else if (_touchState == TouchState.InitPan)
+            {
+                _touchState = TouchState.UpdatePan;
+            }
+            
+            
+            TriggerTouchEvent(increment, increment.magnitude);
+            //UpdateSingleTouch(TouchPhase.Moved, Input.mousePosition);
             return;
         }
 
         if (Input.GetButtonUp("Fire1"))
         {
-            UpdateSingleTouch(TouchPhase.Ended, Input.mousePosition);
+            _prevGesturePosition = _curGesturePosition;
+            _curGesturePosition = Input.mousePosition;
+            
+            if (_touchState == TouchState.InitGesture)
+            {
+                _touchState = TouchState.Tap;
+                TriggerTouchEvent(Vector2.zero, 0f);
+                return;
+            }
+
+            _touchState = TouchState.None;
+            return; 
+            
+            if (_touchState == TouchState.UpdatePan)
+            {
+                _touchState = TouchState.FinishPan;
+
+                var increment = _prevGesturePosition - _curGesturePosition;
+                TriggerTouchEvent(increment, increment.magnitude);
+            }
+            //UpdateSingleTouch(TouchPhase.Ended, Input.mousePosition);
             return;
         }
         
@@ -163,64 +209,52 @@ public class TouchManager : MonoBehaviour
         }
     }
 
+    /*
     void UpdateSingleTouch(TouchPhase touchPhase, Vector2 touchPosition)
     {
         switch (touchPhase)
         {
             case TouchPhase.Began:
                 _touchState = TouchState.InitPan;
-                _initPanPosition = Input.mousePosition;
-                _prevPanPosition = Vector2.zero;
-                _curPanPosition = Input.mousePosition;
+                _initGesturePosition = Input.mousePosition;
+                _prevGesturePosition = Vector2.zero;
+                _curGesturePosition = Input.mousePosition;
 
-                /*
-                var ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
-                Debug.DrawRay(ray.origin, ray.direction * 20f, Color.magenta, 1f);
-                RaycastHit hit;
-                if (Physics.Raycast(ray.origin, ray.direction, out hit, 9999f, _touchLayer))
-                {
-                    _panType = PanType.Player;
-                }
-                else
-                {
-                    _panType = PanType.World;
-                }
-                */
-                
                 //Debug.Log("START PAN WITH " + _panType);
-                TriggerTouchEvent(Vector2.zero);
                 break;
             case TouchPhase.Moved:
-                _prevPanPosition = _curPanPosition;
-                _curPanPosition = Input.mousePosition;
+                _prevGesturePosition = _curGesturePosition;
+                _curGesturePosition = Input.mousePosition;
 
                 // TODO IMPLEMENT TAP
                 //if()
                 _touchState = TouchState.UpdatePan;
                 
                 //Debug.Log("PREV " + _prevPanPosition + "   CUR: " + _curPanPosition + "   DELTA  "  + (_curPanPosition - _prevPanPosition));
-                TriggerTouchEvent(_curPanPosition - _prevPanPosition);
+                //TriggerTouchEvent(_curGesturePosition - _prevGesturePosition);
                 break;
             case TouchPhase.Ended:
                 _touchState = TouchState.FinishPan;
-                TriggerTouchEvent(_curPanPosition - _prevPanPosition);
+                //TriggerTouchEvent(_curGesturePosition - _prevGesturePosition);
                 break;
         }
     }
-
-
-    void TriggerTouchEvent(Vector2 deltaIncrement, float deltaMultitouch = 0f)
+    */
+    
+    void TriggerTouchEvent(Vector2 deltaIncrement, float deltaIncrementMagnitude)
     {
         var touchEventData = new TouchEventData();
         touchEventData.TouchState = _touchState;
-        touchEventData.CurPosition = _curPanPosition;
+        touchEventData.CurPosition = _curGesturePosition;
         touchEventData.DeltaIncrement = deltaIncrement;
-        touchEventData.DeltaMultiTouch = deltaMultitouch;
-        touchEventData.InitPosition = _initPanPosition;
-        touchEventData.CurPanDirection = (_curPanPosition - _initPanPosition).normalized;
-        touchEventData.TotalPanScreenPercentageSize =
-            Vector2.Distance(_initPanPosition, _curPanPosition) / Screen.height;
-             
+        touchEventData.DeltaIncrementMagnitude = deltaIncrementMagnitude;
+        touchEventData.InitPosition = _initGesturePosition;
+
         EventManager.Instance.TriggerEvent(TouchEvent.EventName, touchEventData);
+    }
+
+    public float GetDistanceInScreenPercentage(float distance)
+    {
+        return distance / _screenDiagonal;
     }
 }

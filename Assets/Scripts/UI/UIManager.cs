@@ -30,6 +30,11 @@ public class UIManager : MonoBehaviour
     {
         RemainingMoves.text = remainingMovements.ToString();
     }
+
+    public void OnBuildingTapped()
+    {
+        
+    }
     
     void Start()
     {
