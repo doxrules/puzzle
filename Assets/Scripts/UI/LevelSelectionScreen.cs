@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelectionScreen : MonoBehaviour
 {
+    private const string TownScene = "TownScene";
     
     public void LoadLevel(LevelConfig levelConfig)
     {
@@ -14,6 +15,6 @@ public class LevelSelectionScreen : MonoBehaviour
 
     public void OpenMapScene()
     {
-        SceneManager.LoadScene("TownScene");
+        SceneManager.LoadScene(TownScene);
     }
 }

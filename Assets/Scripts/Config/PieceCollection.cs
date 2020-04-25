@@ -6,8 +6,6 @@ using UnityEngine;
 public class PieceCollection : ScriptableObject
 {
     public List<PieceConfig> PieceConfigs;
-    
-    public bool DebugModeEnabled;
 
     public PieceConfig GetPieceConfig(Piece.PieceType pieceType)
     {

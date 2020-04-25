@@ -1,5 +1,5 @@
 using System;
-using UnityTemplateProjects.Events;
+using Events;
 using UnityEngine;
 using UnityEngine.Serialization;
 

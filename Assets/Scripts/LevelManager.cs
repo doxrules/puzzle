@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityTemplateProjects.Events;
+using Events;
 using Vector3 = UnityEngine.Vector3;
 
 public class LevelManager : MonoBehaviour
@@ -32,6 +32,8 @@ public class LevelManager : MonoBehaviour
     private Piece.PieceType _targetPieceType;
 
     private LevelState _levelState = LevelState.Running;
+
+    private const string PieceLayerName = "Piece";
     
     void Start()
     {
@@ -41,7 +43,7 @@ public class LevelManager : MonoBehaviour
         Debug.Assert(BoosterConfig != null, "BoosterConfig not set");
 
         _mainCamera = Camera.main;
-        _pieceTouchLayer = 1 << LayerMask.NameToLayer("Piece");
+        _pieceTouchLayer = 1 << LayerMask.NameToLayer(PieceLayerName);
         
         _pieceGenerator = FindObjectOfType<PieceGenerator>();
         _uiManager = FindObjectOfType<UIManager>();
@@ -151,12 +153,8 @@ public class LevelManager : MonoBehaviour
         {
             piece.DestroyPiece();
         }
-        _pieceGenerator.CreatePieces(piecesToDestroy, OnPiecesCreated);
         
-        if (!boosterCreated)
-        {
-           // _pieceGenerator.CreatePieces(piecesToDestroy);
-        }
+        _pieceGenerator.CreatePieces(piecesToDestroy, OnPiecesCreated);
     }
 
     bool CreateBoosters(int piecesToDestroy, Piece originalPiece)

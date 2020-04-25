@@ -11,4 +11,3 @@ public class PieceConfig : ScriptableObject
     public GameObject DestroyParticles;
     public bool IsBooster = false;
 }
-

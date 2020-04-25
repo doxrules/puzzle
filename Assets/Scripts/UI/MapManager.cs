@@ -1,15 +1,15 @@
 ﻿using System;
 using UnityEngine;
-using UnityTemplateProjects.Events;
+using Events;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] private Camera MainCamera;
     private int _buildingMapLayer;
+    private const string layer3DUI = "3DUI";
     
     void Start()
     {
-        _buildingMapLayer = 1 << LayerMask.NameToLayer("3DUI");
+        _buildingMapLayer = 1 << LayerMask.NameToLayer(layer3DUI);
         
         EventManager.Instance.StartListening(TouchEvent.EventName, OnTouchEvent);
     }

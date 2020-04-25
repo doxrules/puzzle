@@ -1,9 +1,9 @@
-namespace UnityTemplateProjects.Events
+namespace Events
 {
     using UnityEngine;
     using UnityEngine.Events;
     using System.Collections.Generic;
-    using UnityTemplateProjects.Events;
+    using Events;
 
     public class EventManager
     {
@@ -16,8 +16,7 @@ namespace UnityTemplateProjects.Events
             {
                 if(_instance == null)
                 {
-                    _instance = new EventManager();
-                    _instance._eventDictionary = new Dictionary<string, BaseEvent>();
+                    _instance = new EventManager {_eventDictionary = new Dictionary<string, BaseEvent>()};
                 }
 
                 return _instance;
@@ -39,8 +38,7 @@ namespace UnityTemplateProjects.Events
     
         public void StartListening(string eventName, UnityAction<BaseEventData> listener)
         {
-            BaseEvent thisEvent = null;
-            if (_eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (_eventDictionary.TryGetValue(eventName, out var thisEvent))
             {
                 thisEvent.AddListener(listener);
             }
@@ -49,8 +47,7 @@ namespace UnityTemplateProjects.Events
         public void StopListening(string eventName, UnityAction<BaseEventData> listener)
         {
             if (Instance == null) return;
-            BaseEvent thisEvent = null;
-            if (_eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (_eventDictionary.TryGetValue(eventName, out var thisEvent))
             {
                 thisEvent.RemoveListener(listener);
             }
@@ -58,8 +55,7 @@ namespace UnityTemplateProjects.Events
 
         public void TriggerEvent(string eventName, BaseEventData arg = null)
         {
-            BaseEvent thisEvent = null;
-            if (_eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (_eventDictionary.TryGetValue(eventName, out var thisEvent))
             {
                 thisEvent.Invoke(arg);
             }

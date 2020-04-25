@@ -69,7 +69,6 @@
             <e p="Piece.cs" t="Include" />
           </e>
           <e p="SceneLoader.cs" t="Include" />
-          <e p="Services" t="Include" />
           <e p="TouchManager.cs" t="Include" />
           <e p="UI" t="Include">
             <e p="BillboardMovement.cs" t="Include" />

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnityTemplateProjects.Events
+namespace Events
 {
 
     public class TouchEvent : BaseEvent

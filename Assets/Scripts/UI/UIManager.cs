@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI RemainingMoves;
     [SerializeField] private GameObject VictoryPopup;
     [SerializeField] private GameObject GameoverPopup;
+
+    private const string LevelSelectorScene = "LevelSelector";
     
     public void Initialize(LevelConfig levelConfig)
     {
@@ -46,7 +48,7 @@ public class UIManager : MonoBehaviour
     
     public void OpenMapScene()
     {
-        SceneManager.LoadScene("LevelSelector", LoadSceneMode.Single);
+        SceneManager.LoadScene(LevelSelectorScene, LoadSceneMode.Single);
     }
     
     void Update()

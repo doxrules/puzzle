@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.Events;
 
-namespace UnityTemplateProjects.Events
+namespace Events
 {
 
     [Serializable]
