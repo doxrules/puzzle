@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PieceGenerator : MonoBehaviour
 {
@@ -12,39 +14,42 @@ public class PieceGenerator : MonoBehaviour
     private int _piecesToGenerate;
     private List<Piece.PieceType> _availablePieces;
     private Transform _piecesParent;
-    
-    private int _piecesGenerated;
 
     private float _xRangeInterval;
     private float _yRangeInterval;
+
+    private Action<Piece> _onPieceDestroyed;
     
-    public void Setup(List<Piece.PieceType> availablePieces, Transform piecesParent)
+    public void Setup(List<Piece.PieceType> availablePieces, Transform piecesParent, Action<Piece> onPieceDestroyed)
     {
         _availablePieces = availablePieces;
         _piecesParent = piecesParent;
+        _onPieceDestroyed = onPieceDestroyed;
         
         _xRangeInterval = SpawnArea.size.x * 0.5f * 100f;
         _yRangeInterval = SpawnArea.size.y * 0.5f * 100f;
     }
 
-    public void CreatePieces(int amountOfPieces)
+    public void CreatePieces(int amountOfPieces, Action OnPiecesCreated)
     {
         //Debug.Log("CREATE PIECES " + amountOfPieces);
-        StartCoroutine(CreatePiecesCoroutine(amountOfPieces));
+        StartCoroutine(CreatePiecesCoroutine(amountOfPieces, OnPiecesCreated));
     }
     
-    IEnumerator CreatePiecesCoroutine(int piecesToGenerate)
+    IEnumerator CreatePiecesCoroutine(int piecesToGenerate, Action OnPiecesCreated)
     {
         int piecesGenerated = 0;
         
         while (piecesGenerated  <  piecesToGenerate)
         {
             var newPiece = Instantiate(GetRandomPiece(), GetRandomPosition(), Quaternion.identity, _piecesParent);
-            newPiece.GetComponent<Piece>().Initialize();
+            newPiece.GetComponent<Piece>().Initialize(OnPieceDestroyed);
             ++piecesGenerated;
             
             yield return SpawnDelay;
         }
+
+        OnPiecesCreated();
     }
 
     Vector3 GetRandomPosition()
@@ -59,5 +64,10 @@ public class PieceGenerator : MonoBehaviour
     {
         var pieceType = _availablePieces[Random.Range(0, _availablePieces.Count)];
         return PieceCollection.GetPieceConfig(pieceType).Prefab;
+    }
+
+    void OnPieceDestroyed(Piece piece)
+    {
+        _onPieceDestroyed(piece);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image PieceIcon;
     [SerializeField] private TextMeshProUGUI RemainingPieces;
     [SerializeField] private TextMeshProUGUI RemainingMoves;
+    [SerializeField] private GameObject VictoryPopup;
+    [SerializeField] private GameObject GameoverPopup;
     
     public void Initialize(LevelConfig levelConfig)
     {
@@ -31,14 +34,19 @@ public class UIManager : MonoBehaviour
         RemainingMoves.text = remainingMovements.ToString();
     }
 
-    public void OnBuildingTapped()
+    public void ShowGameOverPanel()
     {
-        
+        GameoverPopup.gameObject.SetActive(true);
     }
     
-    void Start()
+    public void ShowVictoryPanel()
     {
-        
+        VictoryPopup.gameObject.SetActive(true);
+    }
+    
+    public void OpenMapScene()
+    {
+        SceneManager.LoadScene("LevelSelector", LoadSceneMode.Single);
     }
     
     void Update()

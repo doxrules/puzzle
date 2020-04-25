@@ -1,3 +1,4 @@
+using System;
 using UnityTemplateProjects.Events;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -67,7 +68,6 @@ public class CameraController : MonoBehaviour
         SetInitialCamera();
 
         EventManager.Instance.StartListening(TouchEvent.EventName, OnTouchUpdated);
-
     }
     
     
@@ -122,8 +122,10 @@ public class CameraController : MonoBehaviour
     void UpdateZoom(float delta)
     {
         Zoom += delta * CameraZoomSpeed;
-
-
     }
 
+    private void OnDestroy()
+    {
+        EventManager.Instance.StopListening(TouchEvent.EventName, OnTouchUpdated);
+    }
 }

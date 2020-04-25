@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GUIManager : MonoBehaviour
 {
@@ -15,5 +16,10 @@ public class GUIManager : MonoBehaviour
     public void OpenBuildingPopup(BuildingConfig buildingConfig)
     {
         BuildingPopup.OpenPopup(buildingConfig);
+    }
+
+    public void OpenPuzzleSelectionMenu()
+    {
+        SceneManager.LoadScene("LevelSelector", LoadSceneMode.Single);
     }
 }

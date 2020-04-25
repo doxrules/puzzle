@@ -6,12 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 97f901b422177e14bb4463d516bfa60d
+  - enabled: 1
     path: Assets/Scenes/TownScene.unity
     guid: 6c9792811fb08fb4882e17eb56f4bb8c
   - enabled: 1
-    path: Assets/Scenes/Puzzle.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/LevelSelector.unity
+    guid: 6bb0bcd2aeeb0bc4aa4fcaecc0873714
   - enabled: 1
-    path: Assets/Scenes/Map.unity
-    guid: cc26efe9c08e7e745a7952d28f172a53
+    path: Assets/Scenes/BasePuzzleScene.unity
+    guid: ed472e71c250cab44a81a7efb6a77178
+  - enabled: 1
+    path: Assets/Scenes/PuzzleLevels/Puzzle 1.unity
+    guid: f1bd85df262b4264c9febeb19a58656e
+  - enabled: 1
+    path: Assets/Scenes/PuzzleLevels/Puzzle 2.unity
+    guid: 052d7fafd4b2e8a4a9158cb2335ccd61
+  - enabled: 1
+    path: Assets/Scenes/PuzzleLevels/Puzzle 3.unity
+    guid: a516cac796c537d40877adc27aa688f9
+  - enabled: 1
+    path: Assets/Scenes/PuzzleLevels/Puzzle 4.unity
+    guid: 8336b89dae9c7b74387040a317d90a25
+  - enabled: 1
+    path: Assets/Scenes/PuzzleLevels/Puzzle 5.unity
+    guid: cb986642e85921c48bf414b7c6003d73
+  - enabled: 1
+    path: Assets/Scenes/PuzzleLevels/Puzzle 6.unity
+    guid: 47afabac68f553a4e87addab643d7d99
   m_configObjects: {}

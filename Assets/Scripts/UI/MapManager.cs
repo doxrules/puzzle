@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityTemplateProjects.Events;
 
 public class MapManager : MonoBehaviour
@@ -11,13 +12,6 @@ public class MapManager : MonoBehaviour
         _buildingMapLayer = 1 << LayerMask.NameToLayer("3DUI");
         
         EventManager.Instance.StartListening(TouchEvent.EventName, OnTouchEvent);
-    }
-
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     
     private void OnTouchEvent(BaseEventData ev)
@@ -46,5 +40,10 @@ public class MapManager : MonoBehaviour
             
             buildingComponent.BuildingTapped();
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.StopListening(TouchEvent.EventName, OnTouchEvent);
     }
 }

@@ -23,10 +23,11 @@ public class Piece : MonoBehaviour
     public float SearchRange;
 
     private int _pieceNumber;
+    private Action<Piece> _onPieceDestroyed;
     
-    public void Initialize()
+    public void Initialize(Action<Piece> onPieceDestroyed)
     {
-
+        _onPieceDestroyed = onPieceDestroyed;
     }
 
     protected void OnDestroy()
@@ -39,6 +40,11 @@ public class Piece : MonoBehaviour
         if (createParticles)
         {
             CreateParticles();
+        }
+
+        if (_onPieceDestroyed != null)
+        {
+            _onPieceDestroyed(this);
         }
 
         Destroy(this.gameObject);

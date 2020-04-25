@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -8,10 +9,18 @@ using Vector3 = UnityEngine.Vector3;
 
 public class LevelManager : MonoBehaviour
 {
+    public enum LevelState
+    {
+        Running,
+        Victory,
+        GameOver
+    }
+    
     [SerializeField] private GlobalConfig GlobalConfig;
     [SerializeField] private LevelConfig LevelConfig;
     [SerializeField] private Transform PiecesParent;
     [SerializeField] private BoosterConfig BoosterConfig;
+    private Camera _mainCamera;
     
     private int _pieceTouchLayer;
     private UIManager _uiManager;
@@ -21,6 +30,8 @@ public class LevelManager : MonoBehaviour
     private int _remainingMovements;
     private int _remainingPieces;
     private Piece.PieceType _targetPieceType;
+
+    private LevelState _levelState = LevelState.Running;
     
     void Start()
     {
@@ -28,7 +39,8 @@ public class LevelManager : MonoBehaviour
         Debug.Assert(LevelConfig != null, "LevelConfig not set");
         Debug.Assert(PiecesParent != null, "PieceParent not set");
         Debug.Assert(BoosterConfig != null, "BoosterConfig not set");
-        
+
+        _mainCamera = Camera.main;
         _pieceTouchLayer = 1 << LayerMask.NameToLayer("Piece");
         
         _pieceGenerator = FindObjectOfType<PieceGenerator>();
@@ -39,14 +51,19 @@ public class LevelManager : MonoBehaviour
         _remainingPieces = LevelConfig.LevelObjectives[0].Number;
         _targetPieceType = LevelConfig.LevelObjectives[0].PieceType;
         
-        _pieceGenerator.Setup(LevelConfig.AvailablePieces, PiecesParent);
-        _pieceGenerator.CreatePieces(LevelConfig.TotalPieces);
+        _pieceGenerator.Setup(LevelConfig.AvailablePieces, PiecesParent, PieceDestroyed);
+        _pieceGenerator.CreatePieces(LevelConfig.TotalPieces, OnPiecesCreated);
         
         EventManager.Instance.StartListening(TouchEvent.EventName, OnTouchEvent);
     }
 
+    #region Callbacks
+    
     private void OnTouchEvent(BaseEventData ev)
     {
+        if (_levelState != LevelState.Running)
+            return;
+        
         var touchEventData = (TouchEventData) ev;
 
         switch (touchEventData.TouchState)
@@ -57,20 +74,47 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void BoosterDestroyed(int piecesDestroyed)
+    {
+        _pieceGenerator.CreatePieces(piecesDestroyed, OnPiecesCreated);
+    }
+
+    void PieceDestroyed(Piece piece)
+    {
+        if (piece.pieceType == _targetPieceType)
+        {
+            //Debug.Log("BLASTED " + groupSize);
+            _remainingPieces = Mathf.Clamp(_remainingPieces - 1, 0, _remainingPieces);
+            _uiManager.UpdatePieces(_remainingPieces);
+            
+            if (_remainingPieces == 0)
+            {
+                Victory();
+            }
+        }
+    }
+
+    void OnPiecesCreated()
+    {
+        
+    }
+    #endregion
+    
     void ProcessTap(UnityEngine.Vector2 touchPosition)
     {
-        var ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+        var ray = _mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
         RaycastHit hit;
         
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 9999f, _pieceTouchLayer))
         {
             var piece = hit.collider.GetComponent<Piece>();
-
+            if (piece == null)
+                return;
+            
             if (piece.PieceConfig.IsBooster)
             {
                 var iPieceBooster = (IPieceBooster) piece;
                 iPieceBooster.ExecuteBooster();
-                
                 return;
             }
             
@@ -88,54 +132,26 @@ public class LevelManager : MonoBehaviour
     {
         _remainingMovements = Mathf.Clamp(_remainingMovements - 1, 0, _remainingMovements);
         _uiManager.UpdateRemainingMovements(_remainingMovements);
-
-        var groupPieceType = originalPiece.pieceType;
-        var groupSize = group.Count;
         
         DestroyGroup(group, originalPiece);
 
-        if (groupPieceType == _targetPieceType)
-        {
-            //Debug.Log("BLASTED " + groupSize);
-            _remainingPieces = Mathf.Clamp(_remainingPieces - groupSize, 0, _remainingPieces);
-            _uiManager.UpdatePieces(_remainingPieces);
-            
-            if (_remainingPieces == 0)
-            {
-                Victory();
-                return;
-            }
-        }
-        
         if (_remainingMovements <= 0)
         {
              GameOver();
              return;
         }
-
     }
 
-    void GameOver()
-    {
-        Debug.Log("GAME OVER");
-    }
-
-    void Victory()
-    {
-        Debug.Log("VICTORY");
-    }
-    
     void DestroyGroup(List<Piece> group, Piece originalPiece)
     {
         int piecesToDestroy = group.Count;
-
         var boosterCreated = CreateBoosters(piecesToDestroy, originalPiece);
         
         foreach (var piece in group)
         {
             piece.DestroyPiece();
         }
-        _pieceGenerator.CreatePieces(piecesToDestroy);
+        _pieceGenerator.CreatePieces(piecesToDestroy, OnPiecesCreated);
         
         if (!boosterCreated)
         {
@@ -159,8 +175,32 @@ public class LevelManager : MonoBehaviour
         return true;
     }
 
-    public void BoosterDestroyed(int piecesDestroyed)
+    void GameOver()
     {
-        _pieceGenerator.CreatePieces(piecesDestroyed);
+        if (_levelState == LevelState.GameOver)
+            return;
+        
+        if (_levelState == LevelState.Running)
+        {
+            _levelState = LevelState.GameOver;
+            _uiManager.ShowGameOverPanel();
+        }
+    }
+
+    void Victory()
+    {
+        if (_levelState == LevelState.Victory)
+            return;
+        
+        if (_levelState == LevelState.Running)
+        {
+            _levelState = LevelState.GameOver;
+            _uiManager.ShowVictoryPanel();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.StopListening(TouchEvent.EventName, OnTouchEvent);
     }
 }

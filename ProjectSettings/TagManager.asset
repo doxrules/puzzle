@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Background
   - 
   - Piece
   - 3DUI
@@ -43,4 +43,7 @@ TagManager:
     locked: 0
   - name: 3DUI
     uniqueID: 4069706005
+    locked: 0
+  - name: UI
+    uniqueID: 2350242287
     locked: 0

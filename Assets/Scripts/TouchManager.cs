@@ -52,6 +52,8 @@ public class TouchManager : MonoBehaviour
                           Application.platform == RuntimePlatform.IPhonePlayer;
         
         _screenDiagonal = Mathf.Sqrt((Screen.width * Screen.width) + (Screen.height * Screen.height));
+        
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void Update ()
