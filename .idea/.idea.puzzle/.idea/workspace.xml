@@ -81,9 +81,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/MapManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SceneLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TouchManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" />
       </list>
     </option>
   </component>
