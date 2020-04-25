@@ -42,14 +42,12 @@
         <option value="$PROJECT_DIR$/Assets/LevelManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PieceUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Config/GlobalConfig.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Piece.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Config/PiecesConfig.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Config/PieceCollection.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GroupFinder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Config/LevelConfig.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PieceGenerator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Config/PieceConfig.cs" />
         <option value="$PROJECT_DIR$/Assets/Shaders/NewSurfaceShader.shader" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CameraManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Events/BaseEvent.cs" />
@@ -65,8 +63,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Config/BuildingConfig.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/MapManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/MapBuilding.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/GUIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/BuildingPopup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/GUIManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Config/PieceConfig.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Piece.cs" />
       </list>
     </option>
   </component>
@@ -90,10 +90,10 @@
       <option name="pid" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="8652">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="8652" />
       <method v="2" />
     </configuration>
   </component>

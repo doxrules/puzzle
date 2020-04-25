@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: SearchRange
       value: 0.45
       objectReference: {fileID: 0}
+    - target: {fileID: 4440805249143927098, guid: 6d5736e9624fbcc42a3826eba9e2c1f2, type: 3}
+      propertyPath: _pieceConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 02dbd10bdbe395d45a89459bd68fde7d, type: 2}
     - target: {fileID: 4805341601064245352, guid: 6d5736e9624fbcc42a3826eba9e2c1f2, type: 3}
       propertyPath: m_Name
       value: BluePiece

@@ -15,3 +15,4 @@ MonoBehaviour:
   PieceType: 3
   PieceSprite: {fileID: 21300008, guid: 51e2a399831333b478ec978ee598bf0e, type: 3}
   Prefab: {fileID: 6016353912941024875, guid: 85824017515023047b5033319c3000de, type: 3}
+  DestroyParticles: {fileID: 5213097389630061562, guid: fe7e12d4e0379884580e2eae391427ad, type: 3}

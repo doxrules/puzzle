@@ -8,5 +8,6 @@ public class PieceConfig : ScriptableObject
     public Piece.PieceType PieceType;
     public Sprite PieceSprite;
     public GameObject Prefab;
+    public GameObject DestroyParticles;
 }
 

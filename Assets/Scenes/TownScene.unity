@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
+  m_AmbientSkyColor: {r: 0.97867167, g: 1, b: 0.7783019, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -33,12 +33,12 @@ RenderSettings:
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
+  m_DefaultReflectionResolution: 64
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 970322580}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.4462422, g: 0.4960308, b: 0.5746071, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 5e624f53eeab7f147aa27b04436c4f37, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 1e9d10d310e640940add1f1f28f2a514, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -49617,6 +49617,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1697450319673640, guid: 429b354257073ae40ad51c100a60a6be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4469824444545462, guid: 429b354257073ae40ad51c100a60a6be, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1788
@@ -83514,6 +83518,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1902770365646634, guid: 36888e805d00a0b4b82757e3692ede9b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4509780323381818, guid: 36888e805d00a0b4b82757e3692ede9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -49
@@ -83566,6 +83574,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.1690965
       objectReference: {fileID: 0}
+    - target: {fileID: 23804647764631420, guid: 36888e805d00a0b4b82757e3692ede9b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 754229dc66b057d40bcd2ebe48424571, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36888e805d00a0b4b82757e3692ede9b, type: 3}
 --- !u!1 &2139356609 stripped
@@ -84267,9 +84279,9 @@ MonoBehaviour:
   lerpValue: 1
   CameraHorizontalPanSpeed: 39.1
   CameraVerticalPanSpeed: 21.7
-  CameraZoomSpeed: 41.1
+  CameraZoomSpeed: 73.2
   _zoom: 0
-  MinZoom: 20
+  MinZoom: 50
   MaxZoom: 140
 --- !u!4 &2760386907243010543 stripped
 Transform:
