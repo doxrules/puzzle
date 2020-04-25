@@ -32,6 +32,12 @@ public class BombBooster : Piece, IPieceBooster
                 continue;
 
             var pieceComponent = piece.GetComponent<Piece>();
+            
+            if (piece == null)
+            {
+                return;
+            }
+            
             if (destroyedPieces.Contains(pieceComponent))
             {
                 continue;
@@ -53,8 +59,11 @@ public class BombBooster : Piece, IPieceBooster
     IEnumerator DestroyPiece(Piece piece, float delay)
     {
         yield return new WaitForSeconds(delay);
-        
-        piece.DestroyPiece();
+
+        if (piece != null)
+        {
+            piece.DestroyPiece();
+        }
 
         CoroutineFinished();
     }

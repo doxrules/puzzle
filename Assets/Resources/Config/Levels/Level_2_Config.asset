@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level_2_Config
   m_EditorClassIdentifier: 
   SceneName: Puzzle 2
-  TotalPieces: 120
-  TotalMoves: 10
+  TotalPieces: 80
+  TotalMoves: 15
   AvailablePieces: 00000000010000000200000003000000
   LevelObjectives:
   - PieceType: 2
