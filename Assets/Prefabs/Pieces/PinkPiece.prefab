@@ -10,7 +10,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.33139908
+  m_Radius: 0.26
   m_Height: 0.21
   m_Direction: 1
   m_Center: {x: 0.001583457, y: -0.01, z: 0}
@@ -71,10 +71,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4440805249143927098, guid: 6d5736e9624fbcc42a3826eba9e2c1f2, type: 3}
       propertyPath: SearchRange
-      value: 0.45
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 4440805249143927098, guid: 6d5736e9624fbcc42a3826eba9e2c1f2, type: 3}
       propertyPath: _pieceConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: b925976ecc4afce43b69356b58d74ce7, type: 2}
+    - target: {fileID: 4440805249143927098, guid: 6d5736e9624fbcc42a3826eba9e2c1f2, type: 3}
+      propertyPath: PieceConfig
       value: 
       objectReference: {fileID: 11400000, guid: b925976ecc4afce43b69356b58d74ce7, type: 2}
     - target: {fileID: 4805341601064245352, guid: 6d5736e9624fbcc42a3826eba9e2c1f2, type: 3}
@@ -155,7 +159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 478846, guid: 58194b4a856312545a557025edfb6937, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 478846, guid: 58194b4a856312545a557025edfb6937, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -168,6 +172,14 @@ PrefabInstance:
     - target: {fileID: 478846, guid: 58194b4a856312545a557025edfb6937, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478846, guid: 58194b4a856312545a557025edfb6937, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 478846, guid: 58194b4a856312545a557025edfb6937, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 9500292, guid: 58194b4a856312545a557025edfb6937, type: 3}
       propertyPath: m_Enabled

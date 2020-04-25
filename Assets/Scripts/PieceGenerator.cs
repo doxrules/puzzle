@@ -18,26 +18,30 @@ public class PieceGenerator : MonoBehaviour
     private float _xRangeInterval;
     private float _yRangeInterval;
     
-    public void GeneratePieces(int piecesToGenerate, List<Piece.PieceType> availablePieces, Transform piecesParent)
+    public void Setup(List<Piece.PieceType> availablePieces, Transform piecesParent)
     {
-        _piecesToGenerate = piecesToGenerate;
         _availablePieces = availablePieces;
         _piecesParent = piecesParent;
         
         _xRangeInterval = SpawnArea.size.x * 0.5f * 100f;
         _yRangeInterval = SpawnArea.size.y * 0.5f * 100f;
-
-        StartCoroutine(nameof(CreatePieces));
     }
 
-
-    IEnumerator CreatePieces()
+    public void CreatePieces(int amountOfPieces)
     {
-        while (_piecesGenerated  <  _piecesToGenerate)
+        //Debug.Log("CREATE PIECES " + amountOfPieces);
+        StartCoroutine(CreatePiecesCoroutine(amountOfPieces));
+    }
+    
+    IEnumerator CreatePiecesCoroutine(int piecesToGenerate)
+    {
+        int piecesGenerated = 0;
+        
+        while (piecesGenerated  <  piecesToGenerate)
         {
             var newPiece = Instantiate(GetRandomPiece(), GetRandomPosition(), Quaternion.identity, _piecesParent);
-            newPiece.GetComponent<Piece>().Initialize(_piecesGenerated);
-            ++_piecesGenerated;
+            newPiece.GetComponent<Piece>().Initialize();
+            ++piecesGenerated;
             
             yield return SpawnDelay;
         }

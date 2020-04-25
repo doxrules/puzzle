@@ -38,6 +38,10 @@
           <e p="AutoDestroy.cs" t="Include" />
           <e p="CameraController.cs" t="Include" />
           <e p="Config" t="Include">
+            <e p="Boosters" t="Include">
+              <e p="BombBoosterConfig.cs" t="Include" />
+              <e p="BoosterConfig.cs" t="Include" />
+            </e>
             <e p="BuildingConfig.cs" t="Include" />
             <e p="GlobalConfig.cs" t="Include" />
             <e p="LevelConfig.cs" t="Include" />
@@ -51,8 +55,12 @@
           </e>
           <e p="GroupFinder.cs" t="Include" />
           <e p="LevelManager.cs" t="Include" />
-          <e p="Piece.cs" t="Include" />
           <e p="PieceGenerator.cs" t="Include" />
+          <e p="Pieces" t="Include">
+            <e p="BombBooster.cs" t="Include" />
+            <e p="IPieceBooster.cs" t="Include" />
+            <e p="Piece.cs" t="Include" />
+          </e>
           <e p="TouchManager.cs" t="Include" />
           <e p="UI" t="Include">
             <e p="BillboardMovement.cs" t="Include" />

@@ -4,15 +4,15 @@ using UnityEngine.AI;
 
 public class GroupFinder
 {
-    private List<GameObject> _uniquePieces;
+    private List<Piece> _uniquePieces;
     private Piece.PieceType _pieceTypeSearch;
     
-    public List<GameObject> FindGroup(Piece piece)
+    public List<Piece> FindGroup(Piece piece)
     {
-        _uniquePieces = new List<GameObject>();
+        _uniquePieces = new List<Piece>();
         _pieceTypeSearch = piece.pieceType;
         
-        _uniquePieces.Add(piece.gameObject);
+        _uniquePieces.Add(piece);
         TryToAddPieces(piece);
         
         return _uniquePieces;
@@ -27,17 +27,17 @@ public class GroupFinder
             if(hit.gameObject == piece.gameObject)
                 continue;
             
-            if (_uniquePieces.Contains(hit.gameObject))
-                continue;
-            
             var newPiece = hit.GetComponent<Piece>();
             if (newPiece == null)
+                continue;
+            
+            if (_uniquePieces.Contains(newPiece))
                 continue;
 
             if (newPiece.pieceType != _pieceTypeSearch)
                 continue;
             
-            _uniquePieces.Add(hit.gameObject);
+            _uniquePieces.Add(newPiece);
             TryToAddPieces(newPiece);
             
         }

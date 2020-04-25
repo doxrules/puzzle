@@ -9,5 +9,6 @@ public class PieceConfig : ScriptableObject
     public Sprite PieceSprite;
     public GameObject Prefab;
     public GameObject DestroyParticles;
+    public bool IsBooster = false;
 }
 
