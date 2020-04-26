@@ -50,9 +50,5 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(LevelSelectorScene, LoadSceneMode.Single);
     }
-    
-    void Update()
-    {
-        
-    }
+
 }

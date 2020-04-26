@@ -37,13 +37,10 @@ public class TouchManager : MonoBehaviour
     private float _deltaMultiTouch;
     private float _screenDiagonal;
     
-    private int _touchLayer;
     void OnEnable ()
     {
         _touchState = TouchState.None;
 
-        _touchLayer = 1 << 29;
-        
         _touchEvent = new TouchEvent();
         _touchEvent.Initialize();
 
@@ -57,14 +54,6 @@ public class TouchManager : MonoBehaviour
 
     void Update ()
     {
-        /* TODO Not implemented yet
-        if (_isMobileDevice)
-        {
-            UpdateMobileInput();
-            return;
-        }
-        */
-
         UpdatePCInput();
     }
 
@@ -155,69 +144,6 @@ public class TouchManager : MonoBehaviour
     {
         return distance / _screenDiagonal;
     }
-    
-    
-    
-    /* TODO Not implemented yet
-    void UpdateMobileInput()
-    {
-        var touchCount = Input.touchCount;
-
-        if (touchCount == 1)
-        {
-            var touch = Input.touches[0];
-            //UpdateSingleTouch(touch.phase, touch.position);
-            return;
-        }
-        
-        _initGesturePosition = Vector2.zero;
-        _prevGesturePosition = Vector2.zero;
-        _curGesturePosition = Vector2.zero;
-        
-        if (touchCount == 0 || touchCount > 2)
-        {
-            _deltaMultiTouch = 0f;
-            _multiTouchPreviousVector = Vector2.zero;
-            
-            if (_touchState == TouchState.UpdateMultiTouch)
-            {
-                _touchState = TouchState.FinishMultiTouch;
-                TriggerTouchEvent(Vector2.zero, 0f);
-                return;
-            }
-
-            if (_touchState == TouchState.FinishMultiTouch)
-            {
-                _touchState = TouchState.None;
-                return;
-            }
-        }
-        
-        if (touchCount == 2)
-        {
-            var touch1 = Input.touches[0];
-            var touch2 = Input.touches[1];
-            
-            var touchVector = touch2.position - touch1.position;
-
-            // Set initial distance
-            if (_multiTouchPreviousVector == Vector2.zero)
-            {
-                _multiTouchPreviousVector = touchVector;
-                _touchState = TouchState.InitMultiTouch;
-                TriggerTouchEvent(Vector2.zero, 0f);
-                _deltaMultiTouch = 0f;
-                return;
-            }
-
-            var delta = _multiTouchPreviousVector;
-            _deltaMultiTouch = touchVector.magnitude - _multiTouchPreviousVector.magnitude;
-            _multiTouchPreviousVector = touchVector;
-            _touchState = TouchState.UpdateMultiTouch;
-            TriggerTouchEvent(Vector2.zero, _deltaMultiTouch);
-
-        }  
-    }
-    */
+ 
 
 }

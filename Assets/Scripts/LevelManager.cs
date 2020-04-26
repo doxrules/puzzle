@@ -5,6 +5,7 @@ using System.Numerics;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Events;
+using UnityEngine.PlayerLoop;
 using Vector3 = UnityEngine.Vector3;
 
 public class LevelManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class LevelManager : MonoBehaviour
         Victory,
         GameOver
     }
+    private const string PieceLayerName = "Piece";
     
     [SerializeField] private GlobalConfig GlobalConfig;
     [SerializeField] private LevelConfig LevelConfig;
@@ -33,8 +35,6 @@ public class LevelManager : MonoBehaviour
 
     private LevelState _levelState = LevelState.Running;
 
-    private const string PieceLayerName = "Piece";
-    
     void Start()
     {
         Debug.Assert(GlobalConfig != null, "GlobalConfig not set");
@@ -85,7 +85,6 @@ public class LevelManager : MonoBehaviour
     {
         if (piece.pieceType == _targetPieceType)
         {
-            //Debug.Log("BLASTED " + groupSize);
             _remainingPieces = Mathf.Clamp(_remainingPieces - 1, 0, _remainingPieces);
             _uiManager.UpdatePieces(_remainingPieces);
             
@@ -104,7 +103,7 @@ public class LevelManager : MonoBehaviour
     
     void ProcessTap(UnityEngine.Vector2 touchPosition)
     {
-        var ray = _mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+        var ray = _mainCamera.ScreenPointToRay(new Vector3(touchPosition.x, touchPosition.y, 0f));
         RaycastHit hit;
         
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 9999f, _pieceTouchLayer))

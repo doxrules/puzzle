@@ -83,15 +83,8 @@ public class CameraController : MonoBehaviour
 
         switch (touchEventData.TouchState)
         {
-            case TouchManager.TouchState.InitPan:
-                //_initialDragPosition = sender.ScreenPosition;
-                //GetInitialDirectionOnScreenSpace();
-                break;
             case TouchManager.TouchState.UpdatePan:
                 PanCamera(touchEventData.DeltaIncrement);
-                break;
-            case TouchManager.TouchState.FinishPan:
-                //ResetRotation();
                 break;
             case TouchManager.TouchState.UpdateMultiTouch:
                 UpdateZoom(-touchEventData.DeltaIncrementMagnitude);

@@ -32,7 +32,6 @@ public class PieceGenerator : MonoBehaviour
 
     public void CreatePieces(int amountOfPieces, Action OnPiecesCreated)
     {
-        //Debug.Log("CREATE PIECES " + amountOfPieces);
         StartCoroutine(CreatePiecesCoroutine(amountOfPieces, OnPiecesCreated));
     }
     
@@ -43,7 +42,7 @@ public class PieceGenerator : MonoBehaviour
         while (piecesGenerated  <  piecesToGenerate)
         {
             var newPiece = Instantiate(GetRandomPiece(), GetRandomPosition(), Quaternion.identity, _piecesParent);
-            newPiece.GetComponent<Piece>().Initialize(OnPieceDestroyed);
+            newPiece.GetComponent<Piece>().Initialize(_onPieceDestroyed);
             ++piecesGenerated;
             
             yield return SpawnDelay;
@@ -65,9 +64,5 @@ public class PieceGenerator : MonoBehaviour
         var pieceType = _availablePieces[Random.Range(0, _availablePieces.Count)];
         return PieceCollection.GetPieceConfig(pieceType).Prefab;
     }
-
-    void OnPieceDestroyed(Piece piece)
-    {
-        _onPieceDestroyed(piece);
-    }
+    
 }
