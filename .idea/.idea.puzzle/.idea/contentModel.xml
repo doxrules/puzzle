@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\crazylabs\puzzle" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="DOTween" t="Include">
+          <e p="Modules" t="Include">
+            <e p="DOTween.Modules.asmdef" t="Include" />
+            <e p="DOTweenModuleAudio.cs" t="Include" />
+            <e p="DOTweenModulePhysics.cs" t="Include" />
+            <e p="DOTweenModulePhysics2D.cs" t="Include" />
+            <e p="DOTweenModuleSprite.cs" t="Include" />
+            <e p="DOTweenModuleUI.cs" t="Include" />
+            <e p="DOTweenModuleUnityVersion.cs" t="Include" />
+            <e p="DOTweenModuleUtils.cs" t="Include" />
+          </e>
+          <e p="readme.txt" t="Include" />
+        </e>
+        <e p="Resources" t="Include">
+          <e p="4ik0" t="Include">
+            <e p="FakeWater" t="Include">
+              <e p="FakeWaterOpaque.shader" t="Include" />
+              <e p="FakeWaterTransparent.shader" t="Include" />
+            </e>
+          </e>
+          <e p="Art" t="Include">
+            <e p="Shaders" t="Include">
+              <e p="CustomOutline-CameraIndependent.shader" t="Include" />
+              <e p="CustomOutline-ConstantWidth.shader" t="Include" />
+              <e p="CustomOutline.shader" t="Include" />
+              <e p="RegularOutline.shader" t="Include" />
+              <e p="triangleOutline.shader" t="Include" />
+              <e p="UniformOutline.shader" t="Include" />
+              <e p="water.shader" t="Include" />
+            </e>
+          </e>
+          <e p="SimpleFX" t="Include">
+            <e p="Materials" t="Include">
+              <e p="UnlitVertexColour_Alpha.shader" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="AutoDestroy.cs" t="Include" />
+          <e p="CameraController.cs" t="Include" />
+          <e p="Config" t="Include">
+            <e p="Boosters" t="Include">
+              <e p="BombBoosterConfig.cs" t="Include" />
+              <e p="BoosterConfig.cs" t="Include" />
+            </e>
+            <e p="BuildingConfig.cs" t="Include" />
+            <e p="GlobalConfig.cs" t="Include" />
+            <e p="LevelConfig.cs" t="Include" />
+            <e p="PieceCollection.cs" t="Include" />
+            <e p="PieceConfig.cs" t="Include" />
+          </e>
+          <e p="Events" t="Include">
+            <e p="BaseEvent.cs" t="Include" />
+            <e p="EventManager.cs" t="Include" />
+            <e p="Touchevent.cs" t="Include" />
+          </e>
+          <e p="GroupFinder.cs" t="Include" />
+          <e p="LevelManager.cs" t="Include" />
+          <e p="PieceGenerator.cs" t="Include" />
+          <e p="Pieces" t="Include">
+            <e p="BombBooster.cs" t="Include" />
+            <e p="IPieceBooster.cs" t="Include" />
+            <e p="Piece.cs" t="Include" />
+          </e>
+          <e p="SceneLoader.cs" t="Include" />
+          <e p="TouchManager.cs" t="Include" />
+          <e p="UI" t="Include">
+            <e p="BillboardMovement.cs" t="Include" />
+            <e p="BuildingPopup.cs" t="Include" />
+            <e p="CameraCopy.cs" t="Include" />
+            <e p="CameraFacingBillboard.cs" t="Include" />
+            <e p="GenericPopup.cs" t="Include" />
+            <e p="GUIManager.cs" t="Include" />
+            <e p="LevelSelectionScreen.cs" t="Include" />
+            <e p="LevelSelectorComponent.cs" t="Include" />
+            <e p="MapBuilding.cs" t="Include" />
+            <e p="MapManager.cs" t="Include" />
+            <e p="UIManager.cs" t="Include" />
+          </e>
+        </e>
+        <e p="TextMesh Pro" t="Include">
+          <e p="Fonts" t="Include">
+            <e p="LiberationSans - OFL.txt" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
+            </e>
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="DOTween.Modules.csproj" t="IncludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="puzzle.sln" t="IncludeFlat" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+    <e p="C:\Users\alfredo\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\alfredo\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_puzzle.1247443084.00" t="ExcludeRecursive" />
+  </component>
+</project>

@@ -58,3 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+.idea
+.idea/.idea.puzzle
+.idea/.idea.puzzle/.idea/contentModel.xml
+.idea/.idea.puzzle/.idea/workspace.xml
+.idea
